@@ -66,3 +66,5 @@ Thumbs.db
 *.mp4
 .vsconfig
 
+Assets/Resources/key.txt.meta
+Assets/Resources/key.txt
