@@ -102,7 +102,7 @@ public class OVRCameraRig : MonoBehaviour
 	protected readonly string rightHandAnchorName = "RightHandAnchor";
 	protected readonly string leftControllerAnchorName = "LeftControllerAnchor";
 	protected readonly string rightControllerAnchorName = "RightControllerAnchor";
-	protected Camera _centerEyeCamera;
+	public Camera _centerEyeCamera;
 	protected Camera _leftEyeCamera;
 	protected Camera _rightEyeCamera;
 
