@@ -7,15 +7,12 @@ public class CameraCapture : MonoBehaviour
 {
     public int fileCounter;
     public KeyCode screenshotKey;
-    public OVRCameraRig ovrCameraRig;
-    public GameObject centerEyeAnchor;
+
     private Camera Camera;
 
     private void Start()
     {
-        // Camera = this.gameObject.GetComponent<Camera>();
-        // Camera = this.ovrCameraRig.centerEyeAnchor.GetComponent<Camera>();
-        // Debug.Log(this.Camera);
+        Camera = this.gameObject.GetComponent<Camera>();
     }
 
     private void LateUpdate()
@@ -26,15 +23,8 @@ public class CameraCapture : MonoBehaviour
         }
     }
 
-    public string Capture()
+    public void Capture()
     {
-        // Debug.Log("Camera 1: ");
-        // OVRCameraRig ovrCameraRigScript = this.ovrCameraRig.GetComponent<OVRCameraRig>();
-        // this.Camera = ovrCameraRigScript._centerEyeCamera;
-        // Debug.Log(this.Camera);
-        Debug.Log("Camera 2: ");
-        this.Camera = this.centerEyeAnchor.GetComponent<Camera>();
-        Debug.Log(this.Camera);
         RenderTexture activeRenderTexture = RenderTexture.active;
         RenderTexture.active = Camera.targetTexture;
 
@@ -48,12 +38,8 @@ public class CameraCapture : MonoBehaviour
         byte[] bytes = image.EncodeToPNG();
         Destroy(image);
 
-        string filePath = Application.dataPath + "/Captures/" + fileCounter + ".png";
-
-        File.WriteAllBytes(filePath, bytes);
+        File.WriteAllBytes(Application.dataPath + "/Captures/" + fileCounter + ".png", bytes);
         fileCounter++;
         Debug.Log("Saved Capture at " + Application.dataPath + "/Captures/" + fileCounter + ".png"); //
-
-        return filePath;
     }
 }

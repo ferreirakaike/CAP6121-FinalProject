@@ -19,20 +19,10 @@ public class VoiceRecognition : MonoBehaviour
 
     static void OutputSpeechRecognitionResult(SpeechRecognitionResult speechRecognitionResult)
     {
-
-                        CameraCapture cam = new CameraCapture();
-                string filePath = cam.Capture();
-                
         switch (speechRecognitionResult.Reason)
         {
             case ResultReason.RecognizedSpeech:
-                string query = speechRecognitionResult.Text;
-
-                Debug.Log($"RECOGNIZED: Text={query}");
-
-                ServerRequest req = new ServerRequest();
-                req.MakeRequest(query, filePath);
-
+                Debug.Log($"RECOGNIZED: Text={speechRecognitionResult.Text}");
                 break;
             case ResultReason.NoMatch:
                 Debug.Log($"NOMATCH: Speech could not be recognized.");
@@ -73,17 +63,15 @@ public class VoiceRecognition : MonoBehaviour
         YourSubscriptionKey = reader.ReadLine();
         YourServiceRegion = reader.ReadLine();
 
-        Debug.Log("Key: " + YourSubscriptionKey);
-        Debug.Log("Region: " + YourServiceRegion);
-
         reader.Close();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.V) || OVRInput.GetDown(OVRInput.Button.One)){
-            Debug.Log("V or A button pressed");
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            Debug.Log("V key was pressed.");
             GetCommand();
         }
     }
