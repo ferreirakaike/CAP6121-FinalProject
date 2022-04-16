@@ -23,6 +23,7 @@ public class VoiceRecognition : MonoBehaviour
         {
             case ResultReason.RecognizedSpeech:
                 Debug.Log($"RECOGNIZED: Text={speechRecognitionResult.Text}");
+                CheckCommand(speechRecognitionResult.Text.ToUpper());
                 break;
             case ResultReason.NoMatch:
                 Debug.Log($"NOMATCH: Speech could not be recognized.");
@@ -95,5 +96,19 @@ public class VoiceRecognition : MonoBehaviour
         Debug.Log("Speak into your microphone.");
         var speechRecognitionResult = await speechRecognizer.RecognizeOnceAsync();
         OutputSpeechRecognitionResult(speechRecognitionResult);
+    }
+
+    static void CheckCommand(string command)
+    {
+        if (command.ToUpper().Contains("CAPTURE"))
+        {
+            GameObject tempGameObject;
+            tempGameObject = GameObject.Find("CaptureCamera");
+
+            CameraCapture tempCameraCapture;
+            tempCameraCapture = tempGameObject.GetComponent<CameraCapture>();
+
+            tempCameraCapture.Capture();
+        }
     }
 }

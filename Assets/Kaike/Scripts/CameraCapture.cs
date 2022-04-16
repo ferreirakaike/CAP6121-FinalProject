@@ -8,16 +8,24 @@ public class CameraCapture : MonoBehaviour
     public int fileCounter;
     public KeyCode screenshotKey;
 
+    private OVRInput.Controller controller;
+
     private Camera Camera;
 
     private void Start()
     {
         Camera = this.gameObject.GetComponent<Camera>();
+        controller = OVRInput.Controller.RTouch;
     }
 
     private void LateUpdate()
     {
         if (Input.GetKeyDown(screenshotKey))
+        {
+            Capture();
+        }
+
+        if (OVRInput.GetDown(OVRInput.Button.One, controller))
         {
             Capture();
         }
