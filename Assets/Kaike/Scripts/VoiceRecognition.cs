@@ -110,5 +110,16 @@ public class VoiceRecognition : MonoBehaviour
 
             tempCameraCapture.Capture();
         }
+
+        else if (command.ToUpper().Contains("ADD"))
+        {
+            GameObject tempGameObject;
+            tempGameObject = GameObject.Find("ObjectManager");
+
+            ObjectManager tempObjectManager;
+            tempObjectManager = tempGameObject.GetComponent<ObjectManager>();
+
+            tempObjectManager.Add(command);
+        }
     }
 }
