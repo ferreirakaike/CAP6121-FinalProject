@@ -100,18 +100,7 @@ public class VoiceRecognition : MonoBehaviour
 
     static void CheckCommand(string command)
     {
-        if (command.ToUpper().Contains("CAPTURE"))
-        {
-            GameObject tempGameObject;
-            tempGameObject = GameObject.Find("CaptureCamera");
-
-            CameraCapture tempCameraCapture;
-            tempCameraCapture = tempGameObject.GetComponent<CameraCapture>();
-
-            tempCameraCapture.Capture();
-        }
-
-        else if (command.ToUpper().Contains("ADD"))
+        if (command.ToUpper().Contains("ADD"))
         {
             GameObject tempGameObject;
             tempGameObject = GameObject.Find("ObjectManager");
@@ -121,5 +110,24 @@ public class VoiceRecognition : MonoBehaviour
 
             tempObjectManager.Add(command);
         }
+
+        else //if (command.ToUpper().Contains("CAPTURE"))
+        {
+            GameObject tempGameObject;
+            tempGameObject = GameObject.Find("CaptureCamera");
+
+            CameraCapture tempCameraCapture;
+            tempCameraCapture = tempGameObject.GetComponent<CameraCapture>();
+
+            tempCameraCapture.Capture();
+
+            tempGameObject = GameObject.Find("ServerManager");
+
+            ServerRequest tempServerRequest;
+            tempServerRequest = tempGameObject.GetComponent<ServerRequest>();
+
+            tempServerRequest.MakeRequest(command, "null");
+        }
+
     }
 }
