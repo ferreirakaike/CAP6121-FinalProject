@@ -16,6 +16,8 @@ public class ObjectManager : MonoBehaviour
     public GameObject cylinderGreen;
     public GameObject cylinderBlue;
 
+    public Transform CameraTransform;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,19 +47,25 @@ public class ObjectManager : MonoBehaviour
 
         if (hasShape && hasColor)
         {
+            Vector3 position = new Vector3(0, 0, 0);
+            position = CameraTransform.position;
+            //position.z += 3;
+
+            Debug.Log("Adding Object at " + position.ToString());
+
             if (command.ToUpper().Contains("CUBE"))
             {
                 if (command.ToUpper().Contains("RED"))
                 {
-                    Instantiate(cubeRed, this.transform.position, this.transform.rotation);
+                    Instantiate(cubeRed, position, this.transform.rotation);
                 }
                 else if (command.ToUpper().Contains("GREEN"))
                 {
-                    Instantiate(cubeGreen, this.transform.position, this.transform.rotation);
+                    Instantiate(cubeGreen, position, this.transform.rotation);
                 }
                 else if (command.ToUpper().Contains("BLUE"))
                 {
-                    Instantiate(cubeBlue, this.transform.position, this.transform.rotation);
+                    Instantiate(cubeBlue, position, this.transform.rotation);
                 }
             }
 
@@ -65,15 +73,15 @@ public class ObjectManager : MonoBehaviour
             {
                 if (command.ToUpper().Contains("RED"))
                 {
-                    Instantiate(sphereRed, this.transform.position, this.transform.rotation);
+                    Instantiate(sphereRed, position, this.transform.rotation);
                 }
                 else if (command.ToUpper().Contains("GREEN"))
                 {
-                    Instantiate(sphereGreen, this.transform.position, this.transform.rotation);
+                    Instantiate(sphereGreen, position, this.transform.rotation);
                 }
                 else if (command.ToUpper().Contains("BLUE"))
                 {
-                    Instantiate(sphereBlue, this.transform.position, this.transform.rotation);
+                    Instantiate(sphereBlue, position, this.transform.rotation);
                 }
             }
 
@@ -81,15 +89,15 @@ public class ObjectManager : MonoBehaviour
             {
                 if (command.ToUpper().Contains("RED"))
                 {
-                    Instantiate(cylinderRed, this.transform.position, this.transform.rotation);
+                    Instantiate(cylinderRed, position, this.transform.rotation);
                 }
                 else if (command.ToUpper().Contains("GREEN"))
                 {
-                    Instantiate(cylinderGreen, this.transform.position, this.transform.rotation);
+                    Instantiate(cylinderGreen, position, this.transform.rotation);
                 }
                 else if (command.ToUpper().Contains("BLUE"))
                 {
-                    Instantiate(cylinderBlue, this.transform.position, this.transform.rotation);
+                    Instantiate(cylinderBlue, position, this.transform.rotation);
                 }
             }
 
