@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Windows;
@@ -39,6 +40,8 @@ public class ServerRequest : MonoBehaviour
         byte[] bytes = texture2D.EncodeToPNG();
         formData.Add(new MultipartFormFileSection("capture.png", bytes));
 
+        query = GroomString(query);
+
         formData.Add(new MultipartFormFileSection(query, "query.txt"));
 
         UnityWebRequest uwr = UnityWebRequest.Post(this.url, formData);
@@ -73,5 +76,21 @@ public class ServerRequest : MonoBehaviour
         byte[] _bytes = _texture.EncodeToPNG();
         System.IO.File.WriteAllBytes(_fullPath, _bytes);
         Debug.Log(_bytes.Length / 1024 + "Kb was saved as: " + _fullPath);
+    }
+
+    private string GroomString(string text)
+    {
+        text = text.ToLower();
+
+        StringBuilder sb = new StringBuilder();
+        foreach (char c in text)
+        {
+            if ((c >= 'a' && c <= 'z') || c == ' ')
+            {
+                sb.Append(c);
+            }
+        }
+        return sb.ToString();
+
     }
 }
