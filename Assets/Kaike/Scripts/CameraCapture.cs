@@ -11,6 +11,7 @@ public class CameraCapture : MonoBehaviour
     private OVRInput.Controller controller;
 
     private Camera Camera;
+    private Vector3 pos = new Vector3(200, 200, 0);
 
     private void Start()
     {
@@ -49,5 +50,28 @@ public class CameraCapture : MonoBehaviour
         File.WriteAllBytes(Application.dataPath + "/Captures/" + fileCounter + ".png", bytes);
         fileCounter++;
         Debug.Log("Saved Capture at " + Application.dataPath + "/Captures/" + fileCounter + ".png"); //
+    }
+
+    public void DeleteObject()
+    {
+        RaycastHit hit;
+        Ray ray = Camera.ScreenPointToRay(pos);
+        //Debug.DrawRay(ray.origin, ray.direction * 10, Color.yellow);
+        if (Physics.Raycast(ray, out hit))
+        {
+            GameObject gameObject = hit.transform.gameObject;
+
+            // Do something with the object that was hit by the raycast
+            Debug.Log("We have hit object: " + gameObject.name);
+            if (gameObject.name == "RedCube")
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        //DeleteObject();
     }
 }
